@@ -15,20 +15,11 @@
  */
 
 import { IProps } from "@blueprintjs/core";
-import {
-    isTsClass,
-    isTsEnum,
-    isTsInterface,
-    isTsMethod,
-    isTsTypeAlias,
-    ITag,
-    ITypescriptPluginData,
-} from "@documentalist/client";
+import { isTsClass, isTsEnum, isTsInterface, isTsTypeAlias, ITag, ITypescriptPluginData } from "@documentalist/client";
 import * as React from "react";
 import { DocumentationContextTypes, IDocumentationContext } from "../common/context";
 import { EnumTable } from "../components/typescript/enumTable";
 import { InterfaceTable } from "../components/typescript/interfaceTable";
-import { MethodTable } from "../components/typescript/methodTable";
 import { TypeAliasTable } from "../components/typescript/typeAliasTable";
 
 export const TypescriptExample: React.SFC<ITag & IProps> = (
@@ -42,8 +33,6 @@ export const TypescriptExample: React.SFC<ITag & IProps> = (
     const member = typescript[value];
     if (member === undefined) {
         throw new Error(`Unknown @interface ${name}`);
-    } else if (isTsMethod(member)) {
-        return <MethodTable className={className} data={member} />;
     } else if (isTsClass(member) || isTsInterface(member)) {
         return <InterfaceTable className={className} data={member} title="Props" />;
     } else if (isTsEnum(member)) {
